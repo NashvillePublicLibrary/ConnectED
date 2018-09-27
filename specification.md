@@ -15,7 +15,7 @@ Grade
 Enrolled/Not Enrolled
 
 DELETE PATRON
-
+see Library Go purge process
 
 
 Sierra load profile information
