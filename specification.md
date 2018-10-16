@@ -1,25 +1,33 @@
 CRUD
 
-Student ID os composed of a prefix, a school code, and a student-specific id.
+III patron record variable-length field b [BARCODE] (aka Student ID) is composed of a library-standard patron prefix "22091" + a 3-digit school system code (St Paul Public School = "600") + a 6-digit student-specific id.
+APATID/SSN is ultimately optional
+APATID/SSN for St Paul Public school is 6-digit student-specific id only
+APATID/SSN for non-St Paul Public school is 1-letter prefix + 6-digit student-specific id only
+
 Duplicate accounts are OK. When a student moves from schall A to school B, the Library expects to have multiple patron accounts representing that student
+
 There is no staff data extract.
 
+COMPARE SCHOOL AND ILS EXTRACTS
+Comparison is made on ID
+
 CREATE PATRON 
-When compared against ILS extract, new APATID/SSN appears -> new patron should be created.
+When school extract is compared against ILS extract, new APATID/SSN appears in the school extract -> new patron should be created in the ILS
 
 UPDATE PATRON
-Changes when ILS extract differs from school extract in any of the following fields
+Changes when ILS extract differs from school extract in any of the following field values
 Name
 Address
 Grade
 Enrolled/Not Enrolled
 
 DELETE PATRON
-see Library Go purge process
-
+see Library Go purge process (document in git repository)
 
 Sierra load profile information
 
+```
                      Data Not Overlaid    (m2btab.pschools)
      RECORD TYPE          FIELD NAME
 
@@ -59,7 +67,6 @@ Sierra load profile information
 34 > PATRON               <CIRCACTIVE>
 35 > PATRON               <NOTICE PREF>
 
-
                   PATRON record for Schools  (m2btab.pschools)
      RECORD TYPE          FIELD NAME           MARC TAG   SUBFIELDS           
 
@@ -89,3 +96,4 @@ Sierra load profile information
 24 > PATRON               PIN(=)               600        a                   
 25 > PATRON               HOLD CODE(c)         800        ALL                 
 26 > PATRON               DOB(d)               801        ALL                 
+```
