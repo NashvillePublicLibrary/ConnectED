@@ -1,4 +1,4 @@
-CRUD
+# CRUD
 
 III patron record variable-length field b [BARCODE] (aka Student ID) is composed of a library-standard patron prefix "22091" + a 3-digit school system code (St Paul Public School = "600") + a 6-digit student-specific id.
 APATID/SSN is ultimately optional
@@ -9,23 +9,32 @@ Duplicate accounts are OK.
 
 There is no staff data extract.
 
-COMPARE SCHOOL AND ILS EXTRACTS
+## COMPARE SCHOOL AND ILS EXTRACTS
 Comparison is made on ID
 
-CREATE PATRON 
+## CREATE PATRON 
 When school extract is compared against ILS extract, new APATID/SSN appears in the school extract -> new patron should be created in the ILS
 
-UPDATE PATRON
+## UPDATE PATRON
 Changes when ILS extract differs from school extract in any of the following field values
 Name
 Address
 Grade
 Enrolled/Not Enrolled
 
-DELETE PATRON
-see Library Go purge process (document in git repository)
+## DELETE PATRON
+### Current practice (as of 2018-07-01)
+1. Expiration dates are set to 9/30 of the next school year. (e.g., a patron seen in the school extract 2018-10-31 would have an expiration date of 2019-09-30)
+1. At the beginning of the new school year, the template is changed (by Cindy?) to have the next year’s expiration date.
+1. They remain in the system, expired, indefinitely…
+### SPPL would like to add
+1. In October each year, purge all Library Go records that have expiration dates that are 2-years-old or older.
+### Other possibilities
+1. Have Mary Cooper send us codes of E=enrolled, W or G= withdrawn or graduated. Have cards expire when this code is sent. SPPL decided this work is not necessary and the process can continue to use the expiration dates as they are given to us from schools
+### Another thought
+1. SPPL would like to communicate that expired Library Go records can be used for up to 6-months to make a physical card for graduated/withdrawn students.  (How to communicate this?) 
 
-Sierra load profile information
+## Sierra load profile information
 
 ```
                      Data Not Overlaid    (m2btab.pschools)
