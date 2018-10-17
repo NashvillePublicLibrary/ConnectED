@@ -5,7 +5,7 @@ APATID/SSN is ultimately optional
 APATID/SSN for St Paul Public school is 6-digit student-specific id only
 APATID/SSN for non-St Paul Public school is 1-letter prefix + 6-digit student-specific id only
 
-Duplicate accounts are OK. When a student moves from schall A to school B, the Library expects to have multiple patron accounts representing that student
+Duplicate accounts are OK.
 
 There is no staff data extract.
 
