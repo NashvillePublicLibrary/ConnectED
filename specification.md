@@ -106,3 +106,24 @@ Enrolled/Not Enrolled
 25 > PATRON               HOLD CODE(c)         800        ALL                 
 26 > PATRON               DOB(d)               801        ALL                 
 ```
+
+##Crosswalk
+
+|Infinite Campus Extract|Sierra API|Sierra Patron Record|
+|-|-|-|
+||PatronPatch->barcodes[]|P BARCODE(b)|
+||PatronPatch->uniqueIds[]|STUDENTID APATID/SSN(u)|
+||PatronPatch->names[]|PATRN NAME(n)|
+||PatronPatch->addresses[{lines[],type:a}]|ADDRESS(a)|
+||PatronPatch->phones[{number,type:t}]|TELEPHONE(t)|
+||PatronPatch->varFields[{fieldTag:e,content}]|SCHOOL(e)|
+||PatronPatch->varFields[{fieldTag:f,content}]|GRADE(f)|
+||PatronPatch->varFields[{fieldTag:g,content}]|STATUS(g)|
+||PatronPatch->emails[]|EMAIL ADDR(z)|
+||PatronPatch->pin|PIN(=)|
+||PatronPatch->varFields[{fieldTag:c,content}]|HOLD CODE(c)|
+||PatronPatch->birthDate|\<BIRTH DATE>|
+||PatronPatch->varFields[{fieldTag:d,content}]|DOB(d)|
+||PatronPatch->patronCodes{pcode2:c}|\<PCODE2>|
+||PatronPatch->expirationDate|\<EXP DATE>|
+||PatronPatch->patronType |PTYPE \<PATCAT>?|
