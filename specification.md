@@ -25,7 +25,7 @@ Enrolled/Not Enrolled
 ## DELETE PATRON
 ### Current practice (as of 2018-07-01)
 1. Expiration dates are set to 9/30 of the next school year. (e.g., a patron seen in the school extract 2018-10-31 would have an expiration date of 2019-09-30)
-1. At the beginning of the new school year, the template is changed (by Cindy?) to have the next year’s expiration date.
+1. At the beginning of the new school year, the template is changed (by Cindy) to have the next year’s expiration date.
 1. They remain in the system, expired, indefinitely…
 ### SPPL would like to add
 1. In October each year, purge all Library Go records that have expiration dates that are 2-years-old or older.
