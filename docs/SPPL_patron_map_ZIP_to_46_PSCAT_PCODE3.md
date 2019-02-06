@@ -1,4 +1,4 @@
-#Translation Map: ZIP -> 46 PSCAT PCODE3
+# Translation Map: ZIP -> 46 PSCAT PCODE3
 
 |ZIP|COUNTY|PCODE3|
 |-|-|-|
