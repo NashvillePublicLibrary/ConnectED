@@ -1,0 +1,6 @@
+# ENV
+.env
+
+# Dependency directory
+node_modules
+@sydneyunilibrary
