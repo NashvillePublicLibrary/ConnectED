@@ -109,34 +109,33 @@ Enrolled/Not Enrolled
 
 ## Crosswalk
 
-|Infinite Campus Extract|Sierra API|Sierra Patron Record|
-|-|-|-|
-||PatronPatch->barcodes[]|P BARCODE(b)|
-||PatronPatch->uniqueIds[]|STUDENTID APATID/SSN(u)|
-||PatronPatch->names[]|PATRN NAME(n)|
-||PatronPatch->addresses[{lines[],type:a}]|ADDRESS(a)|
-||PatronPatch->phones[{number,type:t}]|TELEPHONE(t)|
-||PatronPatch->varFields[{fieldTag:e,content}]|SCHOOL(e)|
-||PatronPatch->varFields[{fieldTag:f,content}]|GRADE(f)|
-||PatronPatch->varFields[{fieldTag:g,content}]|STATUS(g)|
-||PatronPatch->emails[]|EMAIL ADDR(z)|
-||PatronPatch->pin|PIN(=)|
-||PatronPatch->varFields[{fieldTag:c,content}]|HOLD CODE(c)|
-||PatronPatch->birthDate|\<BIRTH DATE>|
-||PatronPatch->varFields[{fieldTag:d,content}]|DOB(d)|
-||PatronPatch->patronCodes{pcode2:c}|\<PCODE2>|
-||PatronPatch->expirationDate|\<EXP DATE>|
-||PatronPatch->patronType |PTYPE \<PATCAT>?|
+|CONTENT|IC EXTRACT COLUMN|SIERRA SPPL FIELD NAME|SIERRA SPPL FIELD TAG/CODE|SIERRA API PATRONUPDATE|
+|-------|-----------------|----------------------|--------------------------|-----------------------|
+|library patron card number|1|P BARCODE|b|PatronPatch->barcodes[]|
+|student id|2|STUDENTID APATID/SSN|u|??? PatronPatch->uniqueIds[]|
+|patron name|3|PATRN NAME|n|PatronPatch->names[]|
+|patron address|4|ADDRESS|a|PatronPatch->addresses[{lines[],type:a}]|
+|patron telephone|5|TELEPHONE|t|PatronPatch->phones[{number,type:t}]|
+|patron email address|6|EMAIL ADDR|z|PatronPatch->emails[]|
+|patron birth date|7|BIRTH DATE|51|PatronPatch->birthDate|
+|patron pin|8|PIN|=|PatronPatch->pin|
+|patron school name|9|SCHOOL|e|PatronPatch->varFields[{fieldTag:e,content}]|
+|patron grade|10|GRADE|f|PatronPatch->varFields[{fieldTag:f,content}]|
+|patron status|11|STATUS|g|PatronPatch->varFields[{fieldTag:g,content}]|
+|????|12|PCODE2|45|PatronPatch->patronCodes{pcode2:c}|
+|patron type|13|PTYPE (PATCAT)|47|PatronPatch->patronType|
+|patron hold code|14|HOLD CODE|c|PatronPatch->varFields[{fieldTag:c,content}]|
+|patron library account expiration date|15|EXP DATE|43|PatronPatch->expirationDate|
 
-# crosswalk pseudocode
+## crosswalk pseudocode
 
-## All patrons
+### All patrons
 ```
 fixedField["43"] = if (NOW month >= August) { NOW year + 1 . "0930" } else { NOW year . "0930" }
 varField["c"] = substr(lastName,1,1) . substr(studentId,-4)
 ```
 
-## St Paul Public School Students
+### St Paul Public School Students
 ```
 varfield["="] = DO NOT FORGET PIN! (AND DO NOT PUT ALGORITHM IN GITHUB!)
 varField["b"] = 22091600 . studentId
@@ -145,37 +144,37 @@ if(varField["g"] >=6) { fixedField["47"] = 18 }
 if(varField["g"] <=5) { fixedField["47"] = 17 }
 ```
 
-## St Paul Public School Employees
+### St Paul Public School Employees
 ```
 varField["b"] = 22091625 . teacherid
 varField["u"] = "t" . teacherId
 ```
 
-## For all charter/private schools
+### For all charter/private schools
 ```
 if(varField["g"] >=6) { fixedField["47"] = 22 }
 if(varField["g"] <=5) { fixedField["47"] = 21 }
 ```
 
-## Charter School Avalon School 
+### Charter School Avalon School 
 ```
 varField["b"] = 22091800 . lpad(studentId,000000)
 varField["u"] = "a" . lpad(studentId,000000)
 ```
 
-## Charter School Twin Cities Academy
+### Charter School Twin Cities Academy
 ```
 varField["b"] = 22091802 . lpad(studentId,000000)
 varField["u"] = "tca" . lpad(studentId,000000)
 ```
 
-## Charter School Cyber Village Academy
+### Charter School Cyber Village Academy
 ```
 varField["b"] = 22091803 . lpad(studentId,000000)
 varField["u"] = "v" . lpad(studentId,000000)
 ```
 
-## Private School Friends School
+### Private School Friends School
 ```
 varField["b"] = 22091810 . lpad(studentId,000000)
 varField["u"] = "f" . lpad(studentId,000000)
