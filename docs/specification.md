@@ -107,7 +107,7 @@ Enrolled/Not Enrolled
 26 > PATRON               DOB(d)               801        ALL                 
 ```
 
-##Crosswalk
+## Crosswalk
 
 |Infinite Campus Extract|Sierra API|Sierra Patron Record|
 |-|-|-|
@@ -127,3 +127,40 @@ Enrolled/Not Enrolled
 ||PatronPatch->patronCodes{pcode2:c}|\<PCODE2>|
 ||PatronPatch->expirationDate|\<EXP DATE>|
 ||PatronPatch->patronType |PTYPE \<PATCAT>?|
+
+# crosswalk pseudocode
+
+## All patrons
+fixedField["43"] = if (NOW month >= August) { NOW year + 1 . "0930" } else { NOW year . "0930" }
+varField["c"] = substr(lastName,1,1) . substr(studentId,-4)
+ 
+## St Paul Public School Students
+varfield["="] = DO NOT FORGET PIN! (AND DO NOT PUT ALGORITHM IN GITHUB!)
+varField["b"] = 22091600 . studentId
+varField["u"] = studentId
+if(varField["g"] >=6) { fixedField["47"] = 18 }
+if(varField["g"] <=5) { fixedField["47"] = 17 }
+ 
+## St Paul Public School Employees
+varField["b"] = 22091625 . teacherid
+varField["u"] = "t" . teacherId
+ 
+## For all charter/private schools
+if(varField["g"] >=6) { fixedField["47"] = 22 }
+if(varField["g"] <=5) { fixedField["47"] = 21 }
+
+## Charter School Avalon School 
+varField["b"] = 22091800 . lpad(studentId,000000)
+varField["u"] = "a" . lpad(studentId,000000)
+
+## Charter School Twin Cities Academy
+varField["b"] = 22091802 . lpad(studentId,000000)
+varField["u"] = "tca" . lpad(studentId,000000)
+
+## Charter School Cyber Village Academy
+varField["b"] = 22091803 . lpad(studentId,000000)
+varField["u"] = "v" . lpad(studentId,000000)
+
+## Private School Friends School
+varField["b"] = 22091810 . lpad(studentId,000000)
+varField["u"] = "f" . lpad(studentId,000000)
