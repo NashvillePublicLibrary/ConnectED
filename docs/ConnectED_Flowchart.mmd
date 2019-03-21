@@ -1,0 +1,36 @@
+graph TD
+  G(Get Library Data) --> C
+  S(Get School Data) --> C
+  C(Compare Library and School Data) --> D
+  D(Push changes to Library) --> R
+  R(Report)
+
+subgraph Push changes to Library
+  P{Which ILS?}
+  P --> P1
+  P --> P5
+  P1(Carl.X) --> P1A
+  P1A(Delete via API) --> P1B
+  P1B(Create via API) --> P1C
+  P1C(Update via API)
+  P5(Sierra) --> P5A
+  P5A
+end
+
+subgraph Get Library Data
+  L{Which ILS?} --> L1(Carl.X)
+  L --> L2(Evergreen)
+  L --> L3(Koha)
+  L --> L4(Library.Solution)
+  L --> L5(Sierra)
+  L --> L6(SirsiDynix)
+  L1 --> L1A(Extract via ad hoc SQL)
+  L5 --> L5A
+  L5A(via API) --> L5A1
+  L5A1(patronQuery - retrieves patronIds) --> L5A2
+  L5A2(chunk patronIds) --> L5A3
+  L5A3(patronList - retrieves details)
+  L5 --> L5B
+  L5B(via SQL) --> L5B1
+  L5B1(can SQL work?)
+end
