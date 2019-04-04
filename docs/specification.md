@@ -109,23 +109,23 @@ Enrolled/Not Enrolled
 
 ## Crosswalk
 
-|CONTENT|IC EXTRACT COLUMN|SIERRA SPPL FIELD NAME|SIERRA SPPL FIELD TAG/CODE|SIERRA API PATRONUPDATE|
-|-------|-----------------|----------------------|--------------------------|-----------------------|
-|library patron card number|1|P BARCODE|b|PatronPatch->barcodes[]|
-|student id|2|STUDENTID APATID/SSN|u|??? PatronPatch->uniqueIds[]|
-|patron name|3|PATRN NAME|n|PatronPatch->names[]|
-|patron address|4|ADDRESS|a|PatronPatch->addresses[{lines[],type:a}]|
-|patron telephone|5|TELEPHONE|t|PatronPatch->phones[{number,type:t}]|
-|patron email address|6|EMAIL ADDR|z|PatronPatch->emails[]|
-|patron birth date|7|BIRTH DATE|51|PatronPatch->birthDate|
-|patron pin|8|PIN|=|PatronPatch->pin|
-|patron school name|9|SCHOOL|e|PatronPatch->varFields[{fieldTag:e,content}]|
-|patron grade|10|GRADE|f|PatronPatch->varFields[{fieldTag:f,content}]|
-|patron status|11|STATUS|g|PatronPatch->varFields[{fieldTag:g,content}]|
-|????|12|PCODE2|45|PatronPatch->patronCodes{pcode2:c}|
-|patron type|13|PTYPE (PATCAT)|47|PatronPatch->patronType|
-|patron hold code|14|HOLD CODE|c|PatronPatch->varFields[{fieldTag:c,content}]|
-|patron library account expiration date|15|EXP DATE|43|PatronPatch->expirationDate|
+|CONTENT|patreon_scheme valid regexp|IC EXTRACT COLUMN|SIERRA SPPL FIELD NAME|SIERRA SPPL FIELD TAG/CODE|SIERRA API PATRONUPDATE|
+|-------|---------------------------|-----------------|----------------------|--------------------------|-----------------------|
+|library patron card number|^220916\d{8}$|1|P BARCODE|b|PatronPatch->barcodes[]|
+|student id|^\d{6}$|2|STUDENTID APATID/SSN|u|??? PatronPatch->uniqueIds[]|
+|patron name||3|PATRN NAME|n|PatronPatch->names[]|
+|patron address||4|ADDRESS|a|PatronPatch->addresses[{lines[],type:a}]|
+|patron telephone||5|TELEPHONE|t|PatronPatch->phones[{number,type:t}]|
+|patron email address||6|EMAIL ADDR|z|PatronPatch->emails[]|
+|patron birth date||7|BIRTH DATE|51|PatronPatch->birthDate|
+|patron pin||8|PIN|=|PatronPatch->pin|
+|patron school name||9|SCHOOL|e|PatronPatch->varFields[{fieldTag:e,content}]|
+|patron grade|^(PK|K|[1-9]|10|11|12)$|10|GRADE|f|PatronPatch->varFields[{fieldTag:f,content}]|
+|patron status||11|STATUS|g|PatronPatch->varFields[{fieldTag:g,content}]|
+|pcode2|^[ct]$|12|PCODE2|45|PatronPatch->patronCodes{pcode2:c}|
+|patron type|^(17|18|19|21|22)$|13|PTYPE (PATCAT)|47|PatronPatch->patronType|
+|patron hold code||14|HOLD CODE|c|PatronPatch->varFields[{fieldTag:c,content}]|
+|patron library account expiration date||15|EXP DATE|43|PatronPatch->expirationDate|
 
 ## crosswalk pseudocode
 
